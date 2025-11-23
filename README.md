@@ -1,1 +1,1 @@
-This is a "Rock Paper Scissors" Game and My second Project using Java Script [Website Link](https://rock-p.netlify.app/)
+This is a "Rock Paper Scissors" Game and My second Project using Java Script [Website Link]([https://rock-p.netlify.app/](https://thakurshaurya.github.io/Rps_game/))
