@@ -1,0 +1,136 @@
+/* responsive.css
+   Purpose: overrides & media-query driven tweaks to make the game layout
+   behave well on very small phones, mid-size phones, tablets, laptops, and large displays.
+   This file intentionally targets layout / spacing / touch targets and doesn't
+   duplicate heavy visual styles from style.css.
+*/
+
+/* ---------- Base tweaks for all viewports ---------- */
+/* make images scale nicely inside their circular buttons */
+.btn img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ensure .panel / container can breathe on tiny displays */
+.panel {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* increase tappable area on touch devices */
+@media (pointer: coarse) {
+  .btn { min-width: 140px; min-height: 140px; }
+  .btn img { height: 100px; width: 100px; }
+  #reset { min-width: 120px; padding: 0.6rem 1rem; }
+}
+
+/* ---------- Very small phones (≤360px) ---------- */
+@media (max-width: 360px) {
+  :root {
+    --gap: 1rem;
+    --radius: 12px;
+  }
+
+  header h1 { font-size: 1rem; line-height: 1.3; padding: 0.45rem 0; }
+  .container { gap: 0.8rem; margin-top: 1rem; }
+  .btn { height: 120px; width: 120px; }
+  .btn img { height: 78px; width: 78px; }
+  #result { font-size: 0.92rem; padding: 0.6rem; }
+  body { padding: 1rem; }
+}
+
+/* ---------- Small phones (≤420px) ---------- */
+@media (max-width: 420px) {
+  .panel { max-width: 560px; padding: 1rem; }
+  .btn { height: 130px; width: 130px; }
+  .btn img { height: 88px; width: 88px; }
+  .container { gap: 1rem; }
+  #result { width: 100%; font-size: 0.98rem; }
+}
+
+/* ---------- Medium phones / phablets (≤540px) ---------- */
+@media (max-width: 540px) {
+  header h1 { font-size: 1.15rem; }
+  .btn { height: 140px; width: 140px; }
+  .btn img { height: 96px; width: 96px; }
+  .container { margin-top: 0.9rem; gap: 1.1rem; }
+}
+
+/* ---------- Small tablets / large phones (≤768px) ---------- */
+@media (max-width: 768px) {
+  .panel { padding: 1rem 1.2rem; }
+  .container { gap: 1.6rem; }
+  .btn { height: 150px; width: 150px; }
+  .btn img { height: 104px; width: 104px; }
+  #result { max-width: 90%; }
+  #reset { height: 44px; }
+}
+
+/* ---------- Tablets / landscape phones (769px – 1024px) ---------- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root { --gap: 2rem; }
+  .panel { padding: 1.4rem 1.6rem; }
+  .container { gap: 2rem; flex-wrap: nowrap; }
+  .btn { height: 155px; width: 155px; }
+  .btn img { height: 112px; width: 112px; }
+  #result { font-size: 1.02rem; }
+}
+
+/* ---------- Laptops / small desktops (1025px – 1366px) ---------- */
+@media (min-width: 1025px) and (max-width: 1366px) {
+  .panel { max-width: 920px; padding: 1.8rem; }
+  .container { gap: clamp(1.5rem, 3vw, 3rem); }
+  .btn { height: 165px; width: 165px; }
+  .btn img { height: 120px; width: 120px; }
+}
+
+/* ---------- Large desktops (≥1367px) ---------- */
+@media (min-width: 1367px) {
+  .panel { max-width: 1060px; padding: 2rem; }
+  .container { gap: 3.2rem; }
+  .btn { height: 180px; width: 180px; }
+  .btn img { height: 132px; width: 132px; }
+  header h1 { font-size: 1.7rem; }
+}
+
+/* ---------- Portrait vs Landscape specific tweaks ---------- */
+@media (orientation: landscape) and (max-width: 900px) {
+  /* on small landscape devices stack vertically if space is tight */
+  .container {
+    gap: 1rem;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* If screen is very narrow, stack buttons vertically for easier tapping */
+@media (max-width: 340px) {
+  .container { flex-direction: column; gap: 0.9rem; }
+  .btn { width: 70%; max-width: 220px; border-radius: 14px; }
+  .btn img { border-radius: 12px; }
+}
+
+/* ---------- Accessibility: prefers-reduced-motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+
+/* ---------- High-density displays: ensure images look crisp ---------- */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* if you have high-res assets you can serve them via JS/CSS for retina */
+  /* e.g. background-image: url('images/rock@2x.png'); */
+}
+
+/* ---------- Utility: keep focus outlines visible for keyboard users ---------- */
+@media (hover: none) {
+  :focus { outline: 3px solid rgba(8,27,49,0.12); outline-offset: 3px; }
+}
+
+/* ---------- Small helpful overrides (safe to include) ---------- */
+#result { word-break: break-word; white-space: normal; }
+.container, .panel { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+/* End of responsive.css */

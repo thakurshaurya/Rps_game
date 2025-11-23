@@ -1,0 +1,157 @@
+:root{
+  --bg: #f8f6f1;
+  --accent: #f0c24a;
+  --muted: #e9e6e2;
+  --text: #0d1b2a;
+  --card: #ffffff;
+  --shadow: 0 8px 20px rgba(13,27,42,0.08);
+  --glass: rgba(255,255,255,0.6);
+  --radius: 14px;
+  --gap: 2rem;
+  --transition: 220ms cubic-bezier(.2,.9,.3,1);
+}
+
+/* Reset & base */
+* { box-sizing: border-box; }
+html,body { height:100%; }
+body{
+  margin:0;
+  font-family: "Roboto Mono", monospace;
+  background: linear-gradient(180deg,var(--bg), #f3f7fb 60%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:2rem;
+}
+
+/* Page frame */
+.panel{
+  width:100%;
+  max-width:920px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), var(--card));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.6rem;
+  text-align:center;
+}
+
+/* Header */
+header h1{
+  margin:0;
+  font-size:1.6rem;
+  letter-spacing:0.6px;
+  font-weight:700;
+  padding:0.6rem 0;
+  color:var(--text);
+}
+
+/* Game area */
+.container {
+  display:flex;
+  gap: clamp(1.25rem, 3vw, 3rem);
+  justify-content:center;
+  align-items:center;
+  margin-top:1.6rem;
+  flex-wrap:wrap;
+  padding: 0.6rem;
+}
+
+/* Single choice button */
+.btn {
+  height: 165px;
+  width: 165px;
+  border-radius: 50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: linear-gradient(180deg, var(--glass), rgba(255,255,255,0.75));
+  border: 1px solid rgba(13,27,42,0.06);
+  box-shadow: 0 6px 14px rgba(9,18,30,0.06);
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active{ transform: translateY(3px) scale(.995); }
+.btn:focus-visible{ outline: 3px solid rgba(240,194,74,0.22); outline-offset:4px; }
+
+/* Image inside button */
+.btn img {
+  height:120px;
+  width:120px;
+  object-fit:cover;
+  border-radius:50%;
+  transition: transform var(--transition), filter var(--transition), box-shadow var(--transition);
+}
+/* hover/focus visual feedback */
+.btn:hover img,
+.btn:focus img{
+  transform: scale(1.06);
+  filter: brightness(0.98) saturate(1.02);
+  box-shadow: 0 10px 24px rgba(9,18,30,0.08);
+}
+
+/* Result area */
+#final{
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  display:flex;
+  justify-content:center;
+}
+#result {
+  max-width: 520px;
+  width: calc(100% - 3rem);
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: linear-gradient(90deg, rgba(240,194,74,0.15), rgba(255,255,255,0.6));
+  border: 1px solid rgba(13,27,42,0.06);
+  box-shadow: 0 8px 18px rgba(13,27,42,0.06);
+  font-weight:700;
+  font-size:1.05rem;
+  text-decoration: underline;
+  display:none; /* shown by .visible */
+  transition: opacity var(--transition), transform var(--transition);
+  transform: translateY(-6px);
+  color:var(--text);
+}
+
+/* Helper class: add .visible to show result from JS */
+#result.visible{
+  display:block;
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* Reset button styling */
+#reset{
+  height:46px;
+  min-width:110px;
+  border-radius: 10px;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  background: linear-gradient(180deg,var(--accent), #e6a92d);
+  color: #08121a;
+  font-weight:800;
+  letter-spacing:0.6px;
+  box-shadow: 0 8px 20px rgba(222,138,37,0.18);
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+  cursor:pointer;
+}
+#reset:hover{ transform: translateY(-3px); opacity:0.95; box-shadow: 0 14px 36px rgba(222,138,37,0.18); }
+#reset:active{ transform: translateY(1px); }
+#reset:focus-visible{ outline: 3px solid rgba(8,27,49,0.12); outline-offset:3px; }
+
+/* Small screens */
+@media (max-width:640px){
+  .container { gap: 1rem; margin-top: 1rem; }
+  .btn { height: 130px; width:130px; }
+  .btn img { height:96px; width:96px; }
+  header h1{ font-size:1.25rem; }
+  #result { font-size:0.98rem; padding:0.75rem; }
+}
+
+/* Optional utility: subtle page footer spacing if needed */
+.spacer{ height:0.5rem; }
